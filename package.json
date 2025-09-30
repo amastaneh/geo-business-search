@@ -1,0 +1,24 @@
+{
+  "name": "geo-business-search",
+  "version": "25.1.21",
+  "private": true,
+  "scripts": {
+    "dev": "npm version patch && next dev --turbopack -p 3005",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "next": "15.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.4",
+    "tailwindcss": "^4"
+  }
+}
