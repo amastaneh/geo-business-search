@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from "next/image";
-import { searchPlaces } from './lib/places';
+import axios from 'axios';
 
 export default function HomePage() {
 	const [apiKey, setApiKey] = useState('');
@@ -20,7 +20,7 @@ export default function HomePage() {
 		setLoading(true);
 		setErr('');
 		try {
-			const data = await searchPlaces({
+			const { data } = await axios.post('/api/places', {
 				apiKey,
 				center: { lat: parseFloat(lat), lng: parseFloat(lng) },
 				radius: parseInt(radius, 10),
