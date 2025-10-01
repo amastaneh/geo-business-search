@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "npm version patch && next dev --turbopack -p 3005",
-    "build": "next build --turbopack",
+    "build": "next build",
+    "build2": "next build --turbopack",
     "start": "next start",
     "lint": "eslint"
   },
