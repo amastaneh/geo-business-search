@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+// Fonts
 const geistSans = Geist({
 	variable: "--font-geist-sans",
 	subsets: ["latin"],
@@ -13,8 +14,9 @@ const geistMono = Geist_Mono({
 	display: "swap",
 });
 
+// Site metadata (sub-path aware for GitHub Pages)
 export const metadata = {
-	metadataBase: new URL("https://example.com"),
+	metadataBase: new URL("https://amastaneh.github.io/geo-business-search/"),
 	title: {
 		default: "Geo Business Search (BYOT)",
 		template: "%s · Geo Business Search",
@@ -22,8 +24,9 @@ export const metadata = {
 	description: "Find nearby businesses using your own Google Maps API key.",
 	applicationName: "GBizSearch",
 	icons: {
-		icon: "/favicon.ico",
-		apple: "/apple-touch-icon.png",
+		// Use path-relative URLs so they resolve under /geo-business-search/
+		icon: "favicon.ico",
+		apple: "apple-icon.png",
 	},
 	appleWebApp: {
 		title: "GBizSearch",
@@ -33,9 +36,10 @@ export const metadata = {
 	openGraph: {
 		title: "Geo Business Search (BYOT)",
 		description: "Find nearby businesses using your own Google Maps API key.",
-		url: "/",
+		url: "./",
 		siteName: "Geo Business Search",
-		images: [{ url: "/og.png", width: 1200, height: 630 }],
+		// Use an existing asset from /public
+		images: [{ url: "logo.png" }],
 		locale: "en_US",
 		type: "website",
 	},
@@ -43,15 +47,17 @@ export const metadata = {
 		card: "summary_large_image",
 		title: "Geo Business Search (BYOT)",
 		description: "Find nearby businesses using your own Google Maps API key.",
-		images: ["/og.png"],
+		images: ["logo.png"],
 	},
 	robots: {
 		index: true,
 		follow: true,
 	},
-	manifest: "/site.webmanifest",
+	// Match your /public/manifest.json
+	manifest: "manifest.json",
 };
 
+// Viewport/theme
 export const viewport = {
 	themeColor: [
 		{ media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -65,11 +71,14 @@ export const viewport = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en" dir="ltr">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh bg-background text-foreground`}
-			>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh bg-background text-foreground`}>
 				{children}
 			</body>
+			<footer className="container mx-auto py-4 mt-10">
+				<p className="text-center text-xs text-gray-400 dark:text-gray-600">
+					&copy; {new Date().getFullYear()} Geo Business Search v{process.env.npm_package_version}. All rights reserved.
+				</p>
+			</footer>
 		</html>
 	);
 }

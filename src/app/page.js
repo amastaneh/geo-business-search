@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from "next/image";
+import { searchPlaces } from './lib/places';
 
 export default function HomePage() {
 	const [apiKey, setApiKey] = useState('');
@@ -19,20 +20,18 @@ export default function HomePage() {
 		setLoading(true);
 		setErr('');
 		try {
-			const res = await fetch('/api/places', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					apiKey,
-					center: { lat: parseFloat(lat), lng: parseFloat(lng) },
-					radius: parseInt(radius, 10),
-					keyword: keyword || undefined,
-					pageToken: pageToken || undefined
-				})
+			const data = await searchPlaces({
+				apiKey,
+				center: { lat: parseFloat(lat), lng: parseFloat(lng) },
+				radius: parseInt(radius, 10),
+				keyword: keyword || undefined,
+				pageToken: pageToken || undefined
 			});
-			const data = await res.json();
-			if (!res.ok) throw new Error(data?.message || 'Request failed');
-			setResults(prev => pageToken ? [...prev, ...(data.results || [])] : (data.results || []));
+			if (!data) throw new Error('Request failed');
+			setResults(prev => pageToken
+				? [...prev, ...(data.results || [])]
+				: (data.results || [])
+			);
 			setNextPageToken(data.nextPageToken || null);
 			if (apiKey) { maybeStoreApiKey('GeoBiz Search'); }
 		} catch (e) {
@@ -46,7 +45,6 @@ export default function HomePage() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		// اعتبارسنجی ساده سمت کلاینت
 		if (!apiKey) return setErr('API Key is required.');
 		if (!lat || !lng) return setErr('Latitude and Longitude are required.');
 		if (!radius || Number.isNaN(Number(radius)) || Number(radius) <= 0) {
