@@ -33,16 +33,15 @@ export const searchPlaces = async ({ apiKey, center, radius, keyword, pageToken 
     // Get Details (for each place)
     const details = await Promise.all(
         results.map(async (r) => {
-            const dq = new URLSearchParams({
-                key: apiKey,
-                place_id: r.place_id,
-                fields: 'place_id,name,formatted_address,formatted_phone_number',
-            });
             try {
-                const dRes = await fetch(`${DETAILS_URL}?${dq.toString()}`);
-                if (!dRes.ok) return null;
-                const dJson = await dRes.json();
-                return dJson?.status === 'OK' ? dJson : null;
+                const dRes = await axios.get(DETAILS_URL, {
+                    params: {
+                        key: apiKey,
+                        place_id: r.place_id,
+                        fields: 'place_id,name,formatted_address,formatted_phone_number',
+                    }
+                });
+                return dRes.data;
             } catch {
                 return null;
             }
