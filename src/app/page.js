@@ -115,7 +115,7 @@ export default function HomePage() {
 	};
 
 	const showFilters = () => (
-		<form onSubmit={onSubmit} autoComplete="on" className="space-y-3 bg-white/50 py-4 rounded-xl">
+		<form onSubmit={onSubmit} autoComplete="on" className="space-y-3 py-4 rounded-xl">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
 				<div className="w-full md:col-span-2">
 					<label className="block text-sm mb-1">Google Maps API Key *</label>
@@ -267,7 +267,7 @@ export default function HomePage() {
 			{results.length > 0 &&
 				<div className="overflow-x-auto border border-gray-300 rounded-md">
 					<table className="min-w-full text-xs">
-						<thead className="bg-gray-100">
+						<thead className="bg-gray-100 text-gray-600">
 							<tr>
 								<th className="text-left p-3">#</th>
 								<th className="text-left p-3">Name</th>
