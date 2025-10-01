@@ -73,7 +73,7 @@ export default function RootLayout({ children }) {
 		<html lang="en" dir="ltr">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh bg-background text-foreground`}>
 				{children}
-				<footer className="container mx-auto py-4 mt-10">
+				<footer className="container mx-auto py-4 mt-5">
 					<p className="text-center text-xs text-gray-400 dark:text-gray-600">
 						&copy; {new Date().getFullYear()} Geo Business Search v{process.env.npm_package_version}. All rights reserved.
 					</p>

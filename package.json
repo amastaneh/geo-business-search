@@ -1,6 +1,6 @@
 {
 	"name": "geo-business-search",
-	"version": "25.1.28",
+	"version": "25.1.30",
 	"private": true,
 	"scripts": {
 		"dev": "npm version patch --no-git-tag-version && next dev --turbopack -p 3005",
