@@ -2,7 +2,7 @@
 // const repo = 'geo-business-search'
 
 module.exports = {
-    output: 'export',
+    //output: 'export',
     images: { unoptimized: true },
     // basePath: isProd ? `/${repo}` : '',
     // assetPrefix: isProd ? `/${repo}/` : '',
