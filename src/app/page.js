@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from "next/image";
 
 export default function HomePage() {
 	const [apiKey, setApiKey] = useState('');
@@ -87,12 +88,15 @@ export default function HomePage() {
 	return (
 		<main className="mx-auto max-w-3xl p-6">
 			<h1 className="flex items-center text-2xl font-semibold mb-4">
-				<img
+				<Image
 					src="/logo.png"
 					alt="Logo"
-					className="w-10 h-10 mr-2"
+					width={40}
+					height={40}
 				/>
-				Geo Business Search (BYOT)
+				<span className="ml-3">
+					Geo Business Search (BYOT)
+				</span>
 			</h1>
 			<form onSubmit={onSubmit} autoComplete="on" className="space-y-3 bg-white/50 py-4 rounded-xl">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
