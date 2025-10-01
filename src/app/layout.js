@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 	display: "swap",
 });
 
-// Site metadata (sub-path aware for GitHub Pages)
+// Site metadata
 export const metadata = {
-	metadataBase: new URL("https://amastaneh.github.io/geo-business-search/"),
+	metadataBase: new URL("https://geo-business-search.vercel.app/"),
 	title: {
 		default: "Geo Business Search (BYOT)",
 		template: "%s · Geo Business Search",
