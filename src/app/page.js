@@ -43,7 +43,32 @@ export default function HomePage() {
 				if (apiKey) { maybeStoreApiKey('GeoBiz Search'); }
 			})
 			.catch(ex => {
+				// 1- Log full error
+				const isAxios = !!ex.isAxiosError;
+				const serverMsg =
+					ex?.response?.data?.error ??
+					ex?.response?.data?.message ??
+					ex?.response?.data?.detail ??
+					null;
+				const status = ex?.response?.status;
+				const statusText = ex?.response?.statusText;
+				const humanMsg = serverMsg || (status ? `HTTP ${status}${statusText ? ` ${statusText}` : ''}` : ex.message);
+				console.group('Request failed');
+				console.error('Message:', humanMsg);
+				console.error('URL:', ex?.config?.url);
+				console.error('Method:', ex?.config?.method);
+				console.error('Status:', status, statusText);
+				console.error('Response data:', ex?.response?.data);
+				console.error('Response headers:', ex?.response?.headers);
+				console.error('Config:', ex?.config);
+				if (typeof ex?.toJSON === 'function') { console.error('toJSON():', ex.toJSON()); }
+				console.error('Full error object:', ex);
+				console.groupEnd();
+
+				// 2- Show friendly message
 				setErr(ex.message);
+
+				// 3- Clear results
 				setResults([]);
 				setNextPageToken(null);
 			})

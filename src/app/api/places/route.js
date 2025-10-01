@@ -7,6 +7,16 @@ export async function POST(req) {
         const data = await searchPlaces(body);
         return NextResponse.json(data ?? { results: [], nextPageToken: null }, { status: 200 });
     } catch (err) {
-        return NextResponse.json({ error: err?.message || 'Server error' }, { status: 400 });
+        const status = err?.response?.status || (err?.message?.includes('Invalid') ? 400 : 500);
+        const payload = {
+            error: err?.message || 'Server error',
+            code: err?.code ?? null,
+            details: {
+                from: 'server',
+                cause: err?.cause ?? null,
+                axiosData: err?.response?.data ?? null,
+            },
+        };
+        return NextResponse.json(payload, { status });
     }
 }
